@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.tobiasbrandt.ubitricity.ubicarpark.service.ChargeConnectionService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class ChargeConnectionsController {
@@ -15,14 +16,14 @@ public class ChargeConnectionsController {
 	@Autowired
 	private ChargeConnectionService chargeConnectionService;
 
-//	@ApiOperation("Get the status of all current charge connections")
+	@ApiOperation("Get the status of all current charge connections")
 	@GetMapping(PATH)
 	public void getChargeConnections() {
 //		chargeConnectionService.createChargeConnection(...);
 		System.out.println(chargeConnectionService); // TODO: delete
 	}
 
-//	@ApiOperation("Creates a charging connection for a certain charging point. This is done when a car is plugged into a charging point.")
+	@ApiOperation("Creates a charging connection for a certain charging point. This is done when a car is plugged into a charging point.")
 	@PostMapping(PATH)
 	public void createChargeConnection() {
 //		chargeConnectionService.createChargeConnection(...);
