@@ -2,6 +2,8 @@ package de.tobiasbrandt.ubitricity.ubicarpark.service.chargepoint;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,9 +19,11 @@ public class ChargePoint {
 	private String name;
 
 	@Basic(optional = false)
+	@Enumerated(EnumType.STRING)
 	private ChargePointStatus status;
 
-	@Basic(optional = true)
+	@Basic
+	@Enumerated(EnumType.STRING)
 	private ChargeSpeed chargeSpeed;
 
 	public Long getId() {
