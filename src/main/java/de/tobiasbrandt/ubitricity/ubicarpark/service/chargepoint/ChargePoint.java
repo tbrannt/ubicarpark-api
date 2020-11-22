@@ -1,5 +1,6 @@
 package de.tobiasbrandt.ubitricity.ubicarpark.service.chargepoint;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,52 @@ public class ChargePoint {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	private Long id;
+
+	@Basic(optional = false)
+	private String name;
+
+	@Basic(optional = false)
+	private ChargePointStatus status;
+
+	@Basic(optional = true)
+	private ChargeSpeed chargeSpeed;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public ChargePointStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ChargePointStatus status) {
+		this.status = status;
+	}
+
+	public ChargeSpeed getChargeSpeed() {
+		return chargeSpeed;
+	}
+
+	public void setChargeSpeed(ChargeSpeed chargeSpeed) {
+		this.chargeSpeed = chargeSpeed;
+	}
+
+	@Override
+	public String toString() {
+		return "ChargePoint [id=" + id + ", name=" + name + ", status=" + status + ", chargeSpeed=" + chargeSpeed + "]";
+	}
 
 }
