@@ -7,14 +7,13 @@ public enum ChargeSpeed {
 	// fast charging
 	_20_AMPERES(20);
 
-	private final double amperes;
+	private final long amperes;
 
-	private ChargeSpeed(double amperes) {
+	private ChargeSpeed(long amperes) {
 		this.amperes = amperes;
 	}
 
-	public double getAmperes() {
+	public long getAmperes() {
 		return amperes;
 	}
-
 }
