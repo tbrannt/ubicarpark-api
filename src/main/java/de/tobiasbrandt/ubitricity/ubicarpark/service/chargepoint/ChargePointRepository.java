@@ -12,4 +12,6 @@ interface ChargePointRepository extends JpaRepository<ChargePoint, Long> {
 
 	Optional<ChargePoint> findFirstByChargeSpeedOrderByChargeStartDateAsc(ChargeSpeed chargeSpeed);
 
+	Optional<ChargePoint> findFirstByChargeSpeedOrderByChargeStartDateDesc(ChargeSpeed chargeSpeed);
+
 }

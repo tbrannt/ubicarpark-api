@@ -74,6 +74,29 @@ public class ChargePointService {
 		}
 	}
 
+	/**
+	 * Will switch a connection back from slow charging to fast charging. Only done
+	 * if a slow charging connection exists.
+	 */
+	@Transactional
+	public boolean upgradeNewestSlowChargingChargePoint() {
+		Optional<ChargePoint> slowChargingChargePoint = chargePointRepository
+				.findFirstByChargeSpeedOrderByChargeStartDateDesc(ChargeSpeed._10_AMPERES);
+
+		if (slowChargingChargePoint.isPresent()) {
+			slowChargingChargePoint.get().setChargeSpeed(ChargeSpeed._20_AMPERES);
+
+			logger.info("Upgraded charging for {} to fast charging {}", slowChargingChargePoint.get().getName(),
+					ChargeSpeed._20_AMPERES);
+
+			return true;
+		} else {
+			logger.info("No charging point to upgrade found");
+
+			return false;
+		}
+	}
+
 	private ChargePoint findByNameOrThrow(String chargePointName) {
 		Optional<ChargePoint> chargePointOpt = chargePointRepository.findByName(chargePointName);
 

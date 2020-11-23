@@ -71,7 +71,25 @@ public class ChargeManagementService {
 	@Transactional
 	public ChargePoint stopCharging(String chargePointName) {
 		ChargePoint chargePoint = chargePointService.stopCharging(chargePointName);
-		freeCapacity(chargePoint.getPreviousChargeSpeed());
+
+		ChargeSpeed capacityToFree = null;
+		if (chargePoint.getPreviousChargeSpeed() == ChargeSpeed._20_AMPERES) {
+			if (chargePointService.upgradeNewestSlowChargingChargePoint()) {
+				if (!chargePointService.upgradeNewestSlowChargingChargePoint()) {
+					capacityToFree = ChargeSpeed._10_AMPERES;
+				}
+			} else {
+				capacityToFree = ChargeSpeed._20_AMPERES;
+			}
+		} else {
+			if (!chargePointService.upgradeNewestSlowChargingChargePoint()) {
+				capacityToFree = ChargeSpeed._10_AMPERES;
+			}
+		}
+
+		if (capacityToFree != null) {
+			freeCapacity(capacityToFree);
+		}
 
 		logger.info("Stopped charging {}", chargePointName);
 
