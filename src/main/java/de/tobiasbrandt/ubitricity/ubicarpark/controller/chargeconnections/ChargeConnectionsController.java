@@ -3,10 +3,12 @@ package de.tobiasbrandt.ubitricity.ubicarpark.controller.chargeconnections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.tobiasbrandt.ubitricity.ubicarpark.service.chargemanagement.ChargeManagementService;
@@ -37,6 +39,7 @@ public class ChargeConnectionsController {
 	}
 
 	@ApiOperation("Creates a charging connection for a certain charging point. This is done when a car is plugged into a charging point.")
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(PATH)
 	public ChargeConnectionStatusDto createChargeConnection(
 			@RequestParam(value = "chargePointName", required = true) String chargePointName) {
